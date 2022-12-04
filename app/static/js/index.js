@@ -35,6 +35,8 @@ $("#solve").click(function(e) {
     //Se crea una variable para almacenar la data limpia
     let cleanedGridData = {};
 
+    console.log(gridData);
+
 
     //Se recorre el grid para tomar los datos del grid
     $.each(gridData, function (rowKey, object) {
@@ -68,30 +70,73 @@ $("#solve").click(function(e) {
           if (data.message) {
             alert("Insatisfactible!");
           } else {
-
             console.log(data)
 
-            /* // Matriz de datos
-            let mw = data.data.MW;
+            
+             // Matriz de datos
             // Inicializar tabla de resultados
-            let dias = $("#nd").val();
-            initTableResults(dias, mw);
-            // Mostrar costo minimo
-            $("#costo").text(data.data.costo);
+            resulTable(data);
+
+            // Mostrar números de clientes potenciales
+            $("#clientesPotenciales").text(data.lectores);
             // Mostrar contenedor de resultados
-            $(".container_results").show();
+            //$(".container_results").show();
             // Mensaje
-            alert("Ver resultados!"); */
+            alert("Ver resultados!"); 
           }
         },
         error: function () {
           alert("Datos Invalidos");
         },
       });
+});
+
+
+function resulTable(data) {
+    // Tabla para resultados del minizin
+    const containerResults = document.querySelector('#containerResults');
+
+  
+    let resulDataTable = new Handsontable(containerResults, {
+      startRows: 3,
+      startCols: 2,
+      rowWidths: 100,
+      colHeaders: ['Tema', 'Páginas',],
+      filters: false,
+      dropdownMenu: false,
+      width: "100%",
+      height: 'auto',
+      manualColumnResize: true,
+      manualRowResize: true,
+      colWidths: 100,
+      licenseKey: 'non-commercial-and-evaluation' 
+    });
+
+
+    const gridData = dataTable.getData();
+    console.log(data)
+
+    const grid = data.paginas.map(function(value, key){
+        return [gridData[key][0],value]
+    });
+  
+    // Se cargan los datos despues de hacerle una limpieza
+
+    resulDataTable.loadData(grid);
+  }
 
 
 
-
-
-}
-);
+$("#download").click(function () {
+    const options = {
+        method: "GET",
+    };
+    fetch("/solve", options)
+        .then((res) => {
+            return res.blob();
+        })
+        .then((blob) => {
+            download(blob, "Datos.dzn");
+        })
+        .catch((err) => console.log(err));
+});
