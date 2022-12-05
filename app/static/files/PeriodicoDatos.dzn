@@ -1,0 +1,11 @@
+%  Formato de entrada de datos para el problema del Periodico 
+%  Numero de temas 
+n=5; 
+%  Numero de paginas 
+P=10; 
+%  Numero Min. de paginas 
+minPag=[5, 4, 2, 2, 1]; 
+%  Numero Max. de paginas 
+maxpag=[9, 7, 5, 4, 3]; 
+%  Numero de lectores 
+pr=[1500, 2000, 1000, 1500, 750]; 

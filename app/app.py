@@ -31,7 +31,7 @@ def solve():
             return json.dumps({'message': 'Insatisfactible'})
 
     if request.method == 'GET':
-        return send_from_directory('./static/files', 'datos.dzn', as_attachment=True)
+        return send_from_directory('./static/files', 'PeriodicoDatos.dzn', as_attachment=True)
 
 
 #función para organizar los datos enviados del front para la instancia
@@ -53,7 +53,7 @@ def solver(params):
     Se ejecuta el modelo Minizinc
     """
     # Se configura el modelo y el solver
-    periodico = Model(str(pathLocal)+"/app/model/periodico.mzn")
+    periodico = Model(str(pathLocal)+"/app/model/PeriodicoGeneralizado.mzn")
     gecode = Solver.lookup("gecode")
     instance = Instance(gecode, periodico)
 
@@ -81,7 +81,7 @@ def solver(params):
 #Funcion para escribir información en un archivo .dzn
 def write_file_dzn(data):
     
-    with open(str(pathLocal)+'/app/static/files/datos.dzn', 'w',) as file:
+    with open(str(pathLocal)+'/app/static/files/PeriodicoDatos.dzn', 'w',) as file:
         file.write("%  Formato de entrada de datos para el problema del Periodico \n")
         file.write("%  Numero de temas \n")
         file.write("n={}; \n".format(data['n']))

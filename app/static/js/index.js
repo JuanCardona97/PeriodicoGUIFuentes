@@ -128,7 +128,7 @@ $("#download").click(function () {
             return res.blob();
         })
         .then((blob) => {
-            download(blob, "Datos.dzn");
+            download(blob, "PeriodicoDatos.dzn");
         })
         .catch((err) => console.log(err));
 });
