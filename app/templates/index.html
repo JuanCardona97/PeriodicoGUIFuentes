@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Períodico Minizinc</title>
+    <link rel="shortcut icon" href="../static/images/periodico.ico" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link
       href="https://cdn.jsdelivr.net/npm/handsontable@8.1.0/dist/handsontable.full.min.css"
@@ -17,17 +18,21 @@
     <nav class="navbar navbar-dark bg-primary">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
+            <i class="bi bi-newspaper"></i>
             Periodico
           </a>
         </div>
     </nav>
 
     <div class="container-sm">
-        <h1 class=" display-2 mt-4">Periodico Minizinc</h1>
-
+        <div class="d-flex justify-content-start my-4">
+            <img class="ml-4" src="../static/images/periodico.ico" alt="">
+            <h1 class="display-2 mt-4">Periodico Minizinc</h1>
+        </div>
+        
         <div class="row flex-column-reverse flex-lg-row">
             <div class="col col-xs-12 col-sm-8">
-                <h3 class="mt-4">Parametros</h3>
+                <h3 class="mt-4">Parámetros</h3>
                 <form>
                     <div class="row g-3 align-items-center my-4">
                         <div class="col-auto">
@@ -38,6 +43,7 @@
                         </div>
                     </div>    
                     <div>
+                        <label for="inputPages" class="mb-2">Ingrese los temas en la siguiente tabla:</label>
                         <div id="temas" class="mb-4"></div>
                     </div>  
                     <div class="text-center">
@@ -46,19 +52,26 @@
                 </form>
             </div>
 
-            <div class="col col-xs-12 col-sm-4">
-                <h3 class="mt-4">Instrucciones</h3>
-                <div id="temas" class=""></div>
+            <div class="col col-xs-12 col-sm-auto">
+                <div class="card text-bg-info" style="max-width: 18rem;">
+                    <div class="card-header">Instrucciones de uso</div>
+                    <div class="card-body">
+                        <h6 class="card-title">Para ejecutar la aplicación siga los siguientes pasos.</h6>
+                        <div >
+                            <p class="card-text">1. Ingrese el número de páginas del períodico.</p>
+                            <p class="card-text">2. Ingrese los temas en la tabla, cada fila corresponde a un registro (tema).</p>
+                            <p class="card-text">3. Click en el botón Solucionar.</p>
+                            <p class="card-text">4. Descargue el archivo de datos.dzn.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <hr>
 
-        <div class="row">
-
+        <div id="containerResultados" class="row">
             <h3 class="my-3">Resultados</h3>
-
-
             <div class="col col-md-4 text-center mb-4">
                 <div class="card text-center">
                     <div class="card-header">
@@ -69,58 +82,39 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col col-md-5 text-center mb-4">
+            <div class="col col-md-4 text-center mb-4">
                 <div class="card text-center">
                     <div class="card-header">
                         Número de páginas por tema
                     </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div id="containerResults" class="htCenter"></div>
-                        </div>
-                    </div>
-                       
+                    <div class="card-body text-center">      
+                        <div class="col col-md-12 text-center d-flex">
+                            <div id="containerResults" class=""></div>
+                        </div>     
+                    </div>  
                 </div>
             </div>
 
-            <div class="col col-md-3 text-center mb-4">
+            <div class="col col-md-4 text-center mb-4">
                 <div class="card text-center">
                     <div class="card-header">
-                      Temas para el Periodico
+                        Descargar Datos.dzn
                     </div>
                     <div class="card-body">
-                      <button class="btn btn-primary" id="download">
-                        <i class="bi bi-cloud-arrow-down-fill"></i>
-                        Descargar Datos.dzn
-                      </button>
-                    
+                        <button class="btn btn-primary" id="download">
+                            <i class="bi bi-cloud-arrow-down-fill"></i>
+                            Descargar
+                        </button> 
                     </div>
-                  </div>
+                </div>
             </div>
-
-           
-
-           
-
-
-
         </div>
-        
-
-        
-
-        
     </div>
 
-
-    
-
-
     <script
-      src="https://code.jquery.com/jquery-3.5.1.min.js"
-      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-      crossorigin="anonymous"
+        src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossorigin="anonymous"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/handsontable@8.1.0/dist/handsontable.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>

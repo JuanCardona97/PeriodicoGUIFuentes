@@ -5,13 +5,13 @@ UI of the modeling project of the Complexity and Optimization course
 
 1. Install Python 3.9.0 or >
 
-2.  Install virtualenv (Ubuntu)
+2.  Install virtualenv (Windows)
 
   ```
-  $ sudo apt-get install python-virtualenv virtualenv
+  $ pip install virtualenv
   ```
 
-or
+or (Ubuntu)
 
   ```
   $ sudo pip install virtualenv
@@ -26,7 +26,7 @@ or
 4. Activate virtual environment
 
   ```
-  $ source env/bin/activate
+  $ source env/scripts/activate
   ```
   
 5. Enter the app folder and execute 

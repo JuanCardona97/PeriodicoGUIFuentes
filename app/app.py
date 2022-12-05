@@ -2,16 +2,13 @@ from flask import Flask, render_template, request, json, send_from_directory
 from minizinc import Instance, Model, Solver, Driver
 from pathlib import Path
 
-import pathlib
-
+# Se crea esta variable para tomar el path base
 pathLocal = Path().absolute()
-
 
 app=Flask(__name__)
 
 @app.route('/')
 def index():
-    #return "!Hola mndo"
     return render_template('index.html')
 
 @app.route('/solve', methods=['POST', 'GET'])
@@ -23,7 +20,6 @@ def solve():
         result = solver(instance)
         # Crear archivo
         write_file_dzn(instance)
-
 
         if result:  
             return json.dumps({
@@ -38,8 +34,7 @@ def solve():
         return send_from_directory('./static/files', 'datos.dzn', as_attachment=True)
 
 
-    
-
+#función para organizar los datos enviados del front para la instancia
 def format_data(data):
     """
     Parametros de entrada para el modelo
@@ -83,6 +78,7 @@ def solver(params):
     return result 
 
 
+#Funcion para escribir información en un archivo .dzn
 def write_file_dzn(data):
     
     with open(str(pathLocal)+'/app/static/files/datos.dzn', 'w',) as file:

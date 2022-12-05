@@ -1,6 +1,8 @@
 
-// Iniciacilizacion de la tabla para ingredar datos
+//ocultamos la seccion de resultados
+$("#containerResultados").hide();
 
+// Iniciacilizacion de la tabla para ingredar datos
 const container = document.querySelector('#temas');
 const dataTable = new Handsontable(container, {
   data: [],
@@ -22,7 +24,6 @@ const dataTable = new Handsontable(container, {
   licenseKey: 'non-commercial-and-evaluation'
 });
 
-
 //Se toman los datos del formulario y de la tabla
 $("#solve").click(function(e) {
 
@@ -36,7 +37,6 @@ $("#solve").click(function(e) {
     let cleanedGridData = {};
 
     console.log(gridData);
-
 
     //Se recorre el grid para tomar los datos del grid
     $.each(gridData, function (rowKey, object) {
@@ -66,27 +66,21 @@ $("#solve").click(function(e) {
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function (data) {
-          console.log(data);
           if (data.message) {
             alert("Insatisfactible!");
           } else {
-            console.log(data)
-
-            
-             // Matriz de datos
+            // Mostrar contenedor de resultados
+            $("#containerResultados").show();
             // Inicializar tabla de resultados
             resulTable(data);
-
             // Mostrar números de clientes potenciales
             $("#clientesPotenciales").text(data.lectores);
-            // Mostrar contenedor de resultados
-            //$(".container_results").show();
             // Mensaje
-            alert("Ver resultados!"); 
+            alert("Resultados"); 
           }
         },
         error: function () {
-          alert("Datos Invalidos");
+          alert("Datos Invalidos, por favor ingrese todos los datos.");
         },
       });
 });
@@ -96,34 +90,32 @@ function resulTable(data) {
     // Tabla para resultados del minizin
     const containerResults = document.querySelector('#containerResults');
 
-  
+    //Se configura la tabla para mostrar los resultados
     let resulDataTable = new Handsontable(containerResults, {
-      startRows: 3,
-      startCols: 2,
-      rowWidths: 100,
-      colHeaders: ['Tema', 'Páginas',],
-      filters: false,
-      dropdownMenu: false,
-      width: "100%",
-      height: 'auto',
-      manualColumnResize: true,
-      manualRowResize: true,
-      colWidths: 100,
-      licenseKey: 'non-commercial-and-evaluation' 
+        startRows: 3,
+        startCols: 3,
+        rowWidths: 140,
+        colHeaders: ['Tema', 'Páginas', 'Períodico'],
+        filters: false,
+        dropdownMenu: false,
+        width: "100%",
+        height: 'auto',
+        manualColumnResize: true,
+        manualRowResize: true,
+        colWidths: 100,
+        licenseKey: 'non-commercial-and-evaluation' 
     });
-
 
     const gridData = dataTable.getData();
-    console.log(data)
 
     const grid = data.paginas.map(function(value, key){
-        return [gridData[key][0],value]
+        const isPeriodico =   data.temas[key] ? 'Si':'No';
+        return [gridData[key][0],value,isPeriodico]
     });
-  
-    // Se cargan los datos despues de hacerle una limpieza
 
+    // Se cargan los datos despues de hacerle una limpieza
     resulDataTable.loadData(grid);
-  }
+}
 
 
 
