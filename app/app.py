@@ -90,7 +90,7 @@ def write_file_dzn(data):
         file.write("%  Numero Min. de paginas \n")
         file.write("minPag={}; \n".format(data['minPag']))
         file.write("%  Numero Max. de paginas \n")
-        file.write("maxpag={}; \n".format(data['maxPag']))
+        file.write("maxPag={}; \n".format(data['maxPag']))
         file.write("%  Numero de lectores \n")
         file.write("pr={}; \n".format((data['pr'])))
     
